@@ -10,7 +10,7 @@ export default function Search() {
     }
 
     const handleClick = () => {
-        const formattedQuery = searchQuery.trim().replace(/\s+/g, '+');
+        const formattedQuery = searchQuery.trim().replace(/\s+/g, '-');
         navigate(`/search/${formattedQuery}`)
     }
 
