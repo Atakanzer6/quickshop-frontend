@@ -4,7 +4,7 @@ import {useParams} from 'react-router-dom';
 
 export default function Result() {
     const {q} = useParams()
-    
+    console.log(q);
     return (
         <>
             <Navbar />
