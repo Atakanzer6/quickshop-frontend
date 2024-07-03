@@ -1,4 +1,4 @@
-import Navbar from "./home/Navbar";
+import Navbar from "../home/Navbar";
 
 export default function NotFound() {
     return (

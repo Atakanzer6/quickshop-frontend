@@ -1,5 +1,4 @@
-import Navbar from "./home/Navbar"
-import Search from "./home/Search"
+import SearchPageNavbar from "./SearchPageNavbar";
 import Card from "./Card";
 import {useParams} from 'react-router-dom';
 import { useEffect, useState } from "react";
@@ -34,17 +33,17 @@ export default function Result() {
 
     return (
         <>
-            <Navbar />
-            <Search />
-            <hr />
+            <SearchPageNavbar />
+            
+            
             {loading ? (
                 <p>Loading...</p>
             ) : error ? (
                 <p>Error: {error}</p>
             ) : (
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-6 mx-5 ">
-                    {apiResults.map(data => (
-                        <Card key={uuidv4()} name={data.newegg.name} link={data.newegg.link} img={data.newegg.image} price={data.newegg.price} />
+                    {apiResults[0].newegg.map(data => (
+                        <Card key={uuidv4()} name={data.name} link={data.link} img={data.image} price={data.price} />
                     ))}
                 </div>
             )}
