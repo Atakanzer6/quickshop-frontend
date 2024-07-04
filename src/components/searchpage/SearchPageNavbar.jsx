@@ -1,12 +1,12 @@
-import Search from "../home/Search"
-import Logo from "../home/Logo"
+import Search from "../home/Search";
+import Logo from "../home/Logo";
 
 export default function SearchPageNavbar() {
-    return (
-        <nav className="flex justify-between shadow-md">
-            <Logo />
-            <Search />
-            <Logo />
-        </nav>
-    )
+  return (
+    <nav className=" w-full flex justify-between shadow-md ">
+      <Logo />
+      <Search />
+      <Logo />
+    </nav>
+  );
 }

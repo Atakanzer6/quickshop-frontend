@@ -8,10 +8,10 @@ export default function Card({ img, link, price, name }) {
           alt="Product Image"
         />
       </div>
-      <hr className="mb-auto" />
+      <hr />
+      <p className="text-gray-600 text-sm m-4 mb-auto">{name}</p>
       <div className="p-4">
         {/* <h3 className="text-lg font-medium mb-2">Product Title</h3> */}
-        <p className="text-gray-600 text-sm mb-4">{name}</p>
         <div className="flex items-center justify-between ">
           <span className="font-bold text-lg">${price}</span>
           <a href={link}>

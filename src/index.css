@@ -7,3 +7,6 @@
       @apply bg-gradient-to-b from-green-50 from-10% via-green-50 via-30% to-green-300 to-90%  bg-no-repeat h-screen
     }
   } */
+body {
+  overflow: hidden;
+}
