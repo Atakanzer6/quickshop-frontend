@@ -1,22 +1,18 @@
-export default function SideBar() {
+import SideBarButton from "./SideBarButton";
+
+export default function SideBar({ buttons }) {
   return (
-    <div className=" justify-center w-72  p-4 h-screen border-r-2 ">
+    <div className="flex justify-center w-72  p-4 h-screen border-r-2 ">
       <ul className="mt-4">
-        <li className="mb-2">
-          <a href="#" className="hover:underline">
-            Link 1
-          </a>
-        </li>
-        <li className="mb-2">
-          <a href="#" className="hover:underline">
-            Link 2
-          </a>
-        </li>
-        <li className="mb-2">
-          <a href="#" className="hover:underline">
-            Link 3
-          </a>
-        </li>
+        {buttons.map((button) => (
+          <li key={button.id} className="mb-2">
+            <SideBarButton
+              key={button.id}
+              label={button.label}
+              handleClick={button.handleClick}
+            />
+          </li>
+        ))}
       </ul>
     </div>
   );

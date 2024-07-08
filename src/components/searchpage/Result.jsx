@@ -10,6 +10,35 @@ export default function Result() {
   const [apiResults, setApiResults] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [cardData, setCardData] = useState(null);
+
+  const handleClickNewegg = () => {
+    setCardData(apiResults[0].newegg);
+  };
+
+  const handleClickBestBuy = () => {
+    setCardData(apiResults[0].bestbuy);
+  };
+
+  const handleClickEbay = () => {
+    setCardData(apiResults[0].ebay);
+  };
+
+  const handleClickWalmart = () => {
+    setCardData(apiResults[0].walmart);
+  };
+
+  const handleClickAmazon = () => {
+    setCardData(apiResults[0].amazon);
+  };
+
+  const buttons = [
+    { id: 1, label: "Newegg", handleClick: handleClickNewegg },
+    { id: 2, label: "BestBuy", handleClick: handleClickBestBuy },
+    { id: 3, label: "Ebay", handleClick: handleClickEbay },
+    { id: 4, label: "Walmart", handleClick: handleClickWalmart },
+    { id: 5, label: "Amazon", handleClick: handleClickAmazon },
+  ];
 
   useEffect(() => {
     const fetchData = async () => {
@@ -30,28 +59,35 @@ export default function Result() {
     fetchData();
   }, [q]);
 
+  useEffect(() => {
+    if (apiResults.length > 0) {
+      setCardData(apiResults[0].newegg);
+    }
+  }, [apiResults]);
+
   console.log(apiResults);
 
   return (
     <div>
       <SearchPageNavbar />
       <div className="flex">
-        <SideBar />
+        <SideBar buttons={buttons} />
         {loading ? (
           <p>Loading...</p>
         ) : error ? (
           <p>Error: {error}</p>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-6 mx-5 p-4 h-[calc(100vh-4rem)] overflow-y-scroll">
-            {apiResults[0].newegg.map((data) => (
-              <Card
-                key={uuidv4()}
-                name={data.name}
-                link={data.link}
-                img={data.image}
-                price={data.price}
-              />
-            ))}
+            {cardData &&
+              cardData.map((data) => (
+                <Card
+                  key={uuidv4()}
+                  name={data.name}
+                  link={data.link}
+                  img={data.image}
+                  price={data.price}
+                />
+              ))}
           </div>
         )}
       </div>
