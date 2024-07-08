@@ -12,32 +12,16 @@ export default function Result() {
   const [error, setError] = useState(null);
   const [cardData, setCardData] = useState(null);
 
-  const handleClickNewegg = () => {
-    setCardData(apiResults[0].newegg);
-  };
-
-  const handleClickBestBuy = () => {
-    setCardData(apiResults[0].bestbuy);
-  };
-
-  const handleClickEbay = () => {
-    setCardData(apiResults[0].ebay);
-  };
-
-  const handleClickWalmart = () => {
-    setCardData(apiResults[0].walmart);
-  };
-
-  const handleClickAmazon = () => {
-    setCardData(apiResults[0].amazon);
+  const handleClick = (platform) => {
+    setCardData(apiResults[0][platform]);
   };
 
   const buttons = [
-    { id: 1, label: "Newegg", handleClick: handleClickNewegg },
-    { id: 2, label: "BestBuy", handleClick: handleClickBestBuy },
-    { id: 3, label: "Ebay", handleClick: handleClickEbay },
-    { id: 4, label: "Walmart", handleClick: handleClickWalmart },
-    { id: 5, label: "Amazon", handleClick: handleClickAmazon },
+    { id: 1, label: "Newegg", handleClick: () => handleClick("newegg") },
+    { id: 2, label: "BestBuy", handleClick: () => handleClick("bestbuy") },
+    { id: 3, label: "Ebay", handleClick: () => handleClick("ebay") },
+    { id: 4, label: "Walmart", handleClick: () => handleClick("walmart") },
+    { id: 5, label: "Amazon", handleClick: () => handleClick("amazon") },
   ];
 
   useEffect(() => {
@@ -85,7 +69,7 @@ export default function Result() {
                   name={data.name}
                   link={data.link}
                   img={data.image}
-                  price={data.price}
+                  price={data.price.replace("$", "")}
                 />
               ))}
           </div>
