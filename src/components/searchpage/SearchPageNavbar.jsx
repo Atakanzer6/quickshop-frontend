@@ -3,10 +3,12 @@ import Logo from "../home/Logo";
 
 export default function SearchPageNavbar() {
   return (
-    <nav className=" w-full flex justify-between shadow-md ">
-      <Logo />
+    <nav className="justify-center w-full flex md:justify-between shadow-md">
+      <div className="hidden md:flex justify-items-center">
+        <Logo />
+      </div>
       <Search />
-      <Logo />
+      <div className="invisible"></div>
     </nav>
   );
 }

@@ -12,17 +12,17 @@ export default function Result() {
   const [error, setError] = useState(null);
   const [cardData, setCardData] = useState(null);
 
+  const [buttons, setButtons] = useState([
+    { id: 1, label: "Newegg" },
+    { id: 2, label: "BestBuy" },
+    { id: 3, label: "Ebay" },
+    { id: 4, label: "Walmart" },
+    { id: 5, label: "Amazon" },
+  ]);
+
   const handleClick = (platform) => {
     setCardData(apiResults[0][platform]);
   };
-
-  const buttons = [
-    { id: 1, label: "Newegg", handleClick: () => handleClick("newegg") },
-    { id: 2, label: "BestBuy", handleClick: () => handleClick("bestbuy") },
-    { id: 3, label: "Ebay", handleClick: () => handleClick("ebay") },
-    { id: 4, label: "Walmart", handleClick: () => handleClick("walmart") },
-    { id: 5, label: "Amazon", handleClick: () => handleClick("amazon") },
-  ];
 
   useEffect(() => {
     const fetchData = async () => {
@@ -55,7 +55,7 @@ export default function Result() {
     <div>
       <SearchPageNavbar />
       <div className="flex">
-        <SideBar buttons={buttons} />
+        <SideBar buttons={buttons} handleClick={handleClick} />
         {loading ? (
           <p>Loading...</p>
         ) : error ? (
