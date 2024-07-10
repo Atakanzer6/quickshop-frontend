@@ -2,7 +2,7 @@ import SearchPageNavbar from "./SearchPageNavbar";
 import Card from "./Card";
 import SideBar from "./SideBar";
 import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { v4 as uuidv4 } from "uuid";
 
 export default function Result() {
@@ -11,20 +11,32 @@ export default function Result() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [cardData, setCardData] = useState(null);
+  const initialDataComplete = useRef(false);
 
   const [buttons, setButtons] = useState([
-    { id: 1, label: "Newegg" },
-    { id: 2, label: "BestBuy" },
-    { id: 3, label: "Ebay" },
-    { id: 4, label: "Walmart" },
-    { id: 5, label: "Amazon" },
+    { id: 1, label: "Newegg", isActive: true },
+    { id: 2, label: "BestBuy", isActive: false },
+    { id: 3, label: "Ebay", isActive: false },
+    { id: 4, label: "Walmart", isActive: false },
+    { id: 5, label: "Amazon", isActive: false },
   ]);
 
-  const handleClick = (platform) => {
+  const handleClick = (platform, id) => {
+    // change the rendered data based on clicked platform
     setCardData(apiResults[0][platform]);
+
+    // set all buttons to false and the clickled button to true
+    setButtons((prevButtons) =>
+      prevButtons.map((button) =>
+        button.id === id
+          ? { ...button, isActive: true }
+          : { ...button, isActive: false }
+      )
+    );
   };
 
   useEffect(() => {
+    setLoading(true);
     const fetchData = async () => {
       try {
         const response = await fetch(`http://127.0.0.1:8000/products/${q}`);
@@ -33,6 +45,14 @@ export default function Result() {
         }
         const data = await response.json();
         setApiResults(data);
+        setCardData(data.length > 0 ? data[0].newegg : null);
+        setButtons([
+          { id: 1, label: "Newegg", isActive: true },
+          { id: 2, label: "BestBuy", isActive: false },
+          { id: 3, label: "Ebay", isActive: false },
+          { id: 4, label: "Walmart", isActive: false },
+          { id: 5, label: "Amazon", isActive: false },
+        ]);
       } catch (error) {
         setError(error.message);
       } finally {
@@ -44,8 +64,9 @@ export default function Result() {
   }, [q]);
 
   useEffect(() => {
-    if (apiResults.length > 0) {
+    if (apiResults.length > 0 && !initialDataComplete.current) {
       setCardData(apiResults[0].newegg);
+      initialDataComplete.current = true;
     }
   }, [apiResults]);
 

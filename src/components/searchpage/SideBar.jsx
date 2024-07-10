@@ -8,7 +8,9 @@ export default function SideBar({ buttons, handleClick }) {
           <li key={button.id} className="mb-2">
             <SideBarButton
               key={button.id}
+              id={button.id}
               label={button.label}
+              isActive={button.isActive}
               handleClick={handleClick}
             />
           </li>
