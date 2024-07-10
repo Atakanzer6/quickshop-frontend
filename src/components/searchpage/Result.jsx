@@ -1,6 +1,7 @@
 import SearchPageNavbar from "./SearchPageNavbar";
 import Card from "./Card";
 import SideBar from "./SideBar";
+import LoadingUI from "./LoadingUI";
 import { useParams } from "react-router-dom";
 import { useEffect, useState, useRef } from "react";
 import { v4 as uuidv4 } from "uuid";
@@ -45,7 +46,7 @@ export default function Result() {
         }
         const data = await response.json();
         setApiResults(data);
-        setCardData(data.length > 0 ? data[0].newegg : null);
+
         setButtons([
           { id: 1, label: "Newegg", isActive: true },
           { id: 2, label: "BestBuy", isActive: false },
@@ -53,6 +54,12 @@ export default function Result() {
           { id: 4, label: "Walmart", isActive: false },
           { id: 5, label: "Amazon", isActive: false },
         ]);
+
+        if (data.length > 0) {
+          setCardData(data[0].newegg);
+        } else {
+          setCardData(null);
+        }
       } catch (error) {
         setError(error.message);
       } finally {
@@ -77,24 +84,27 @@ export default function Result() {
       <SearchPageNavbar />
       <div className="flex">
         <SideBar buttons={buttons} handleClick={handleClick} />
-        {loading ? (
-          <p>Loading...</p>
-        ) : error ? (
-          <p>Error: {error}</p>
-        ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-6 mx-5 p-4 h-[calc(100vh-4rem)] overflow-y-scroll">
-            {cardData &&
-              cardData.map((data) => (
+        <div className="flex-grow flex items-start justify-center mt-10 ">
+          {loading ? (
+            <LoadingUI />
+          ) : error ? (
+            <p>Error: {error}</p>
+          ) : cardData && cardData.length > 0 ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-6 mx-5 p-4 h-[calc(100vh-4rem)] overflow-y-scroll">
+              {cardData.map((data) => (
                 <Card
                   key={uuidv4()}
                   name={data.name}
                   link={data.link}
                   img={data.image}
-                  price={data.price.replace("$", "")}
+                  price={data.price ? data.price.replace("$", "") : ""}
                 />
               ))}
-          </div>
-        )}
+            </div>
+          ) : (
+            <p>No results found.</p>
+          )}
+        </div>
       </div>
     </div>
   );
