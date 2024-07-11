@@ -14,7 +14,7 @@ export default function Card({ img, link, price, name }) {
         {/* <h3 className="text-lg font-medium mb-2">Product Title</h3> */}
         <div className="flex items-center justify-between ">
           <span className="font-bold text-lg">${price}</span>
-          <a href={link}>
+          <a href={link} target="_blank">
             <button className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded">
               Buy Now
             </button>

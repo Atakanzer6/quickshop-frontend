@@ -90,7 +90,7 @@ export default function Result() {
           ) : error ? (
             <p>Error: {error}</p>
           ) : cardData && cardData.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-6 mx-5 p-4 h-[calc(100vh-4rem)] overflow-y-scroll">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-6 mx-5 p-4 h-[calc(100vh-8rem)] overflow-y-scroll">
               {cardData.map((data) => (
                 <Card
                   key={uuidv4()}
