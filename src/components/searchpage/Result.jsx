@@ -12,6 +12,7 @@ export default function Result() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [cardData, setCardData] = useState(null);
+  const [isHamburgerMenuOpen, setIsHamburgerMenuOpen] = useState(false);
   const initialDataComplete = useRef(false);
 
   const [buttons, setButtons] = useState([
@@ -21,6 +22,10 @@ export default function Result() {
     { id: 4, label: "Walmart", isActive: false },
     { id: 5, label: "Amazon", isActive: false },
   ]);
+
+  const handleHamburgerMenu = () => {
+    setIsHamburgerMenuOpen((prevState) => !prevState);
+  };
 
   const handleClick = (platform, id) => {
     // change the rendered data based on clicked platform
@@ -81,16 +86,20 @@ export default function Result() {
 
   return (
     <div>
-      <SearchPageNavbar />
+      <SearchPageNavbar handleMenuClick={handleHamburgerMenu} />
       <div className="flex">
-        <SideBar buttons={buttons} handleClick={handleClick} />
-        <div className="flex-grow flex items-start justify-center mt-10 ">
+        <SideBar
+          buttons={buttons}
+          handleClick={handleClick}
+          isMenuOpen={isHamburgerMenuOpen}
+        />
+        <div className="flex-grow flex items-start justify-center mt-8 ">
           {loading ? (
             <LoadingUI />
           ) : error ? (
             <p>Error: {error}</p>
           ) : cardData && cardData.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-6 mx-5 p-4 h-[calc(100vh-8rem)] overflow-y-scroll">
+            <div className="grid grid-cols-1 sm:grid-cols-2  lg:grid-cols-4 gap-x-6 gap-y-6 mx-5 p-4 h-[calc(100vh-6rem)] overflow-y-scroll">
               {cardData.map((data) => (
                 <Card
                   key={uuidv4()}
