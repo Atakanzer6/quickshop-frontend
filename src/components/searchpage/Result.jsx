@@ -86,7 +86,10 @@ export default function Result() {
 
   return (
     <div>
-      <SearchPageNavbar handleMenuClick={handleHamburgerMenu} />
+      <SearchPageNavbar
+        handleMenuClick={handleHamburgerMenu}
+        isOpen={isHamburgerMenuOpen}
+      />
       <div className="flex">
         <SideBar
           buttons={buttons}
