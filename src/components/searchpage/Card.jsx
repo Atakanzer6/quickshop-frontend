@@ -1,6 +1,6 @@
 export default function Card({ img, link, price, name }) {
   return (
-    <div className="flex flex-col bg-white drop-shadow hover:drop-shadow-lg   my-2 mx-2 max-w-xs">
+    <div className="flex flex-col bg-white drop-shadow hover:drop-shadow-lg   my-2 mx-2 max-w-xs max-h-80">
       <div className="relative self-center ">
         <img
           className="h-36 object-scale-down rounded-tl-md rounded-tr-md"

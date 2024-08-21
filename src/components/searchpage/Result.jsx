@@ -102,14 +102,14 @@ export default function Result() {
           ) : error ? (
             <p>Error: {error}</p>
           ) : cardData && cardData.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2  lg:grid-cols-4 gap-x-6 gap-y-6 mx-5 p-4 h-[calc(100vh-6rem)] overflow-y-scroll">
+            <div className="grid grid-cols-1 sm:grid-cols-2  xl:grid-cols-4 gap-x-6 gap-y-6 mx-5 p-4 h-[calc(100vh-6rem)] overflow-y-scroll">
               {cardData.map((data) => (
                 <Card
                   key={uuidv4()}
                   name={data.name}
                   link={data.link}
                   img={data.image}
-                  price={data.price ? data.price.replace("$", "") : ""}
+                  price={data.price}
                 />
               ))}
             </div>

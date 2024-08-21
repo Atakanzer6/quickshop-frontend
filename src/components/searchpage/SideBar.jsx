@@ -4,8 +4,8 @@ export default function SideBar({ buttons, handleClick, isMenuOpen }) {
   return (
     <>
       <div className={isMenuOpen ? "showMenu" : "hideMenu"}>
-        <div className="absolute top-0  px-8 py-2">
-          <ul className="flex flex-col items-center justify-between min-h-[250px]">
+        <div className="absolute top-0  px-8 py-2 overflow-y-scroll h-[calc(100vh-6rem)]">
+          <ul className="flex flex-col items-center justify-between min-h-[250px]  ">
             <h2 className="text-gray-600 text-sm m-2">Sort by platform</h2>
             <hr className="h-px  bg-gray-200 border-0 dark:bg-gray-700 m-1" />
             {buttons.map((button) => (
