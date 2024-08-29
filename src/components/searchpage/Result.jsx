@@ -109,7 +109,7 @@ export default function Result() {
                   name={data.name}
                   link={data.link}
                   img={data.image}
-                  price={data.price}
+                  price={data.price ? data.price.replace("$", "") : ""}
                 />
               ))}
             </div>
